@@ -1,48 +1,85 @@
-//Sim, com certeza! Podemos simplificar ainda mais o código C, focando apenas na coleta sequencial dos atributos essenciais, sem tratamento de buffer e com menos variáveis.
-//Abaixo está uma versão do programa extremamente simplificada, ideal para quem está começando e precisa de um código direto focado em printf (saída) e scanf (entrada).
-Programa C Super Simples (Foco em Países)
-Este programa usa o mínimo de código e variáveis para registrar o nome de um país e seus três atributos de jogo: População, PIB e Pontos Turísticos.
-#include <stdio.h>
+#include <stdio.h> // Inclui a biblioteca para funções de entrada e saída, como printf e scanf
 
 int main() {
-    // VARIÁVEIS SIMPLES
-    char nome[50];         // Para o nome do país
-    int pontos;            // Pontos Turísticos
-    long long populacao;   // População (número grande)
-    long long pib;         // PIB (número grande)
+    // === 1. DEFINIÇÃO DAS VARIÁVEIS ===
+    // Vamos criar variáveis para guardar os dados de DOIS países.
 
-    printf("--- Cadastro de Carta Super Trunfo ---\n");
-    printf("Entre com os dados do PAÍS:\n\n");
+    // Variáveis para a Carta 1
+    char nomePais1[50];
+    int populacao1;
+    float area1;
 
-    // 1. ENTRADA DE DADOS
-    printf("Nome do País: ");
-    // Lê o nome. O %%s lê até o primeiro espaço, o que é mais simples
-    // do que a leitura com espaços (%%[^\n]).
-    scanf("%s", nome);
+    // Variáveis para a Carta 2
+    char nomePais2[50];
+    int populacao2;
+    float area2;
 
-    printf("População (em habitantes): ");
-    scanf("%lld", &populacao);
+    // === 2. CADASTRO DAS CARTAS ===
+    // Pedimos ao usuário para digitar os dados de cada país.
 
-    printf("PIB Anual (em unidades grandes): ");
-    scanf("%lld", &pib);
+    // -- Cadastro da Carta 1 --
+    printf("--- Cadastro da Carta 1 ---\n");
+    printf("Digite o nome do pais (sem espacos): ");
+    scanf("%s", nomePais1); // Lê o nome do país 1
 
-    printf("Número de Pontos Turísticos: ");
-    scanf("%d", &pontos);
+    printf("Digite a populacao: ");
+    scanf("%d", &populacao1); // Lê a população (um número inteiro)
 
-    // 2. SAÍDA DE DADOS (Exibição da Carta)
-    printf("\n================================\n");
-    printf("   CARTA CADASTRADA: %s\n", nome);
-    printf("================================\n");
-    printf("1. Pontos Turísticos: %d\n", pontos);
-    printf("2. População:         %lld\n", populacao);
-    printf("3. PIB:               %lld\n", pib);
-    printf("--------------------------------\n");
+    printf("Digite a area em km2: ");
+    scanf("%f", &area1); // Lê a área (pode ser um número com vírgula)
+    printf("\n"); // Pula uma linha para organizar
 
-    return 0;
+    // -- Cadastro da Carta 2 --
+    printf("--- Cadastro da Carta 2 ---\n");
+    printf("Digite o nome do outro pais (sem espacos): ");
+    scanf("%s", nomePais2);
+
+    printf("Digite a populacao: ");
+    scanf("%d", &populacao2);
+
+    printf("Digite a area em km2: ");
+    scanf("%f", &area2);
+    printf("\n");
+
+
+    // === 3. COMPARAÇÃO DAS CARTAS ===
+    // Agora, vamos comparar os atributos e ver quem ganha em cada um.
+
+    printf("--- RESULTADO DA BATALHA ---\n\n");
+
+    // -- Comparando a POPULAÇÃO --
+    printf("--- Comparando Populacao ---\n");
+    // Se a população do país 1 for maior que a do país 2...
+    if (populacao1 > populacao2) {
+        printf("Vencedor: %s, com %d habitantes!\n", nomePais1, populacao1);
+    }
+    // Senão, se a população do país 2 for maior...
+    else if (populacao2 > populacao1) {
+        printf("Vencedor: %s, com %d habitantes!\n", nomePais2, populacao2);
+    }
+    // Senão (se nenhuma das condições acima for verdade, significa que são iguais)
+    else {
+        printf("Houve um empate na populacao com %d habitantes!\n", populacao1);
+    }
+
+    printf("\n"); // Pula uma linha
+
+    // -- Comparando a ÁREA --
+    printf("--- Comparando Area ---\n");
+    // Se a área do país 1 for maior que a do país 2...
+    if (area1 > area2) {
+        printf("Vencedor: %s, com %.2f km2!\n", nomePais1, area1);
+    }
+    // Senão, se a área do país 2 for maior...
+    else if (area2 > area1) {
+        printf("Vencedor: %s, com %.2f km2!\n", nomePais2, area2);
+    }
+    // Senão, deu empate.
+    else {
+        printf("Houve um empate na area com %.2f km2!\n", area1);
+    }
+
+    printf("\nBatalha finalizada!\n");
+
+    return 0; // Indica que o programa terminou com sucesso
 }
-
-/O que foi simplificado?
- * Menos Variáveis: Eliminamos o código da carta, o estado, a área e as variáveis derivadas.
- * Leitura Mais Simples do Nome: Usamos scanf("%s", nome);. Isso lê o nome do país apenas até o primeiro espaço (ex: lê "Estados" se o usuário digitar "Estados Unidos"), mas é o formato mais fácil de usar com scanf.
- * Sem Limpeza de Buffer: Removemos os laços while (getchar() != '\n'); que eram usados para evitar erros de leitura. O código fica mais limpo, mas é importante lembrar que em programas C maiores, a limpeza de buffer é crucial.
- * Estrutura Direta: A separação em seções (// VARIÁVEIS SIMPLES, // 1. ENTRADA DE DADOS, // 2. SAÍDA DE DADOS) é mais concisa.
